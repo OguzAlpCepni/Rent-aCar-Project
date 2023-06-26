@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Abstract
+namespace DataAccess.concrete.EntityFramework
 {
-    public interface IEntites
+    internal class EfBrandDal
     {
     }
 }

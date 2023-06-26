@@ -1,5 +1,4 @@
-﻿using Core.DataAccess.EntityFramework;
-using Entities.concrete;
+﻿using Entities.concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    internal class ICarDal
+    public interface ICarDal
     {
         List<Car> GetAll();
+        void add(Car car);
+        void Update(Car car);
+        void Delete(Car car);
+
     }
 }

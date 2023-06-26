@@ -12,24 +12,29 @@ namespace Business.concrete
     public class CarManager : ICarService
     {
         ICarDal _CarDal;
+        CarManager(ICarDal CarDal)
+        {
+            _CarDal = CarDal;
+        }
+
         public void Add(Car car)
         {
-            throw new NotImplementedException();
+            _CarDal.add(car);
         }
 
         public void Delete(Car car)
         {
-            throw new NotImplementedException();
+            _CarDal.Delete(car);
         }
 
         public List<Car> GetAll()
         {
-            throw new NotImplementedException();
+            return _CarDal.GetAll();
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _CarDal.Update(car);
         }
     }
 }

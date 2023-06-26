@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.concrete
 {
-    public class Car:IEntities
+    public class Car:IEntites
     {
         public int CarId { get; set; }
         public int BrandId { get; set; }
