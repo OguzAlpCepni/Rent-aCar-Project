@@ -12,14 +12,14 @@ namespace Business.concrete
     public class CarManager : ICarService
     {
         ICarDal _CarDal;
-        CarManager(ICarDal CarDal)
+        public CarManager(ICarDal CarDal)
         {
             _CarDal = CarDal;
         }
 
         public void Add(Car car)
         {
-            _CarDal.add(car);
+            _CarDal.Add(car);
         }
 
         public void Delete(Car car)
