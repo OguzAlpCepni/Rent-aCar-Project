@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.concrete.EntityFramework
 {
-    internal class EfCarDal
+    public class EfCarDal
     {
+
     }
 }

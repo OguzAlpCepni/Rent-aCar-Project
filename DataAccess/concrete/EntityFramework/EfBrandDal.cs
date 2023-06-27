@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.concrete.EntityFramework
 {
-    internal class EfBrandDal
+    public class EfBrandDal
     {
     }
 }
