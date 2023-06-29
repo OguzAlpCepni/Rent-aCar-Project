@@ -13,5 +13,7 @@ namespace Business.Abstract
         void Add(Car car);
         void Delete(Car car);
         void Update(Car car);
+        List<Car> GetAllByBrandId(int id);
+        List<Car> GetByDailyPrice(int min,int max);
     }
 }
