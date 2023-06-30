@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal :EfEntityRepositoryBase<Car,RentACarContext>,ICarDal
     {
         public void Add(Car entity)
         {
@@ -48,6 +50,18 @@ namespace DataAccess.concrete.EntityFramework
             using (RentACarContext rentACarContext = new RentACarContext())
             {// ilk ifade SELECT * FROM CAR ikincide ise istedigin ifadeye göre getir linq
                 return filter == null ? rentACarContext.Set<Car>().ToList() : rentACarContext.Set<Car>().Where(filter).ToList();      
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            using (RentACarContext context = new RentACarContext())
+            {
+                var result = from p in context.Car
+                             join c in context.Brand
+                             on p.BrandId equals c.BrandId
+                             select new CarDetailDto { CarId = p.CarId, CarName = p.CarName, BrandName = c.BrandName, DailyPrice = p.DailyPrice };
+                return result.ToList();
             }
         }
 
