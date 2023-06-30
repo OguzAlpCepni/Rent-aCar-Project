@@ -7,11 +7,16 @@ namespace ConsolUI
     {
         static void Main(string[] args)
         {
+            CarTest();
+        }
+
+        private static void CarTest()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetAll())
             {
-                Console.WriteLine(car.ModelYear);
+                Console.WriteLine(car.CarName);
             }
-        } 
+        }
     }
 }

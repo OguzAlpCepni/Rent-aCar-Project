@@ -47,9 +47,7 @@ namespace DataAccess.concrete.EntityFramework
         {
             using (RentACarContext rentACarContext = new RentACarContext())
             {// ilk ifade SELECT * FROM CAR ikincide ise istedigin ifadeye göre getir linq
-                return filter == null 
-                    ? rentACarContext.Set<Car>().ToList() 
-                    : rentACarContext.Set<Car>().Where(filter).ToList();      
+                return filter == null ? rentACarContext.Set<Car>().ToList() : rentACarContext.Set<Car>().Where(filter).ToList();      
             }
         }
 

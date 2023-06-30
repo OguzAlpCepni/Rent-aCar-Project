@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.concrete.InMemory
 {
-    public class InMemoryCarDal : ICarDal
+    public class InMemoryCarDal  
     {
-        List<Car> _cars;
+        /*List<Car> _cars;
         public InMemoryCarDal() 
         {
             _cars = new List<Car>();
@@ -100,5 +100,6 @@ namespace DataAccess.concrete.InMemory
             CarToUpdate.ModelYear = car.ModelYear;
             CarToUpdate.Description = car.Description;
         }
+        */
     }
 }
