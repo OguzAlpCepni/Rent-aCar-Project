@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Results
 {
-    public interface IResults
-    {
-        bool Success { get; }
-        string Message { get; }
+    // for data
+    public interface IDataResult<T>:IResults
+    {   
+        T Data { get; }
     }
 }
