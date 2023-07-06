@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Business.Constants
 {
-    internal class Message
+    public static class Message
     {
+        public static string CarAdded = "Car added.";
+        public static string CarNameInValid = "Car name is invalid";
+        public static string MaintenanceTime = "sistem bakımda ";
+        public static string CarsListed = "Car Listed";
+        public static string CarUpdated = "Car updated";
+        public static string CarDeleted = "Car deleted";
+
     }
 }
