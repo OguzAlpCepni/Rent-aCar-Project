@@ -1,3 +1,8 @@
+using Business.Abstract;
+using Business.concrete;
+using DataAccess.Abstract;
+using DataAccess.concrete.EntityFramework;
+
 namespace WebAPI
 {
     public class Program
@@ -12,7 +17,11 @@ namespace WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddControllers();
+            // bana arka planda bir referans oluþtur birisi  senden IproductServices isterse  ona bir productManager oluþtur ve onu ver 
+            builder.Services.AddSingleton<ICarService,CarManager>();
+            // eðer bir baðýmlýlýk varsa ona bu referansý ver 
+            builder.Services.AddSingleton<ICarDal,EfCarDal>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
