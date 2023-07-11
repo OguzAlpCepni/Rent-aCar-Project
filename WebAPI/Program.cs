@@ -1,5 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.concrete;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Abstract;
 using DataAccess.concrete.EntityFramework;
 
@@ -19,9 +22,14 @@ namespace WebAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers();
             // bana arka planda bir referans oluþtur birisi  senden IproductServices isterse  ona bir productManager oluþtur ve onu ver 
-            builder.Services.AddSingleton<ICarService,CarManager>();
+            //builder.Services.AddSingleton<ICarService,CarManager>();
             // eðer bir baðýmlýlýk varsa ona bu referansý ver 
-            builder.Services.AddSingleton<ICarDal,EfCarDal>();
+            //builder.Services.AddSingleton<ICarDal,EfCarDal>();
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new AutofacBusinessModule());
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
