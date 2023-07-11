@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
         {
             var result = _carService.GetByDailyPrice(min,max);
             if (result.Success)
-            {
+            {  
                 return Ok(result);
             }
             return BadRequest(result);

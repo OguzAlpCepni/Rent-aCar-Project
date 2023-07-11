@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.concrete;
@@ -19,10 +22,10 @@ namespace Business.concrete
         {
             _CarDal = CarDal;
         }
-
+        [ValidationAspect(typeof(CarValidator))]// add metodunu dogrula carvalidator kullanarak 
         public IResults Add(Car car)
         {
-            if (car.CarName.Length <= 1) return new ErrorResult(Message.CarNameInValid);        // kontrol
+            //ValidationTools.Validate(new CarValidator(), car);
             _CarDal.Add(car);                                                                   // araba eklendi 
             return new SuccessResult(Message.CarAdded);                                         // mesaj gönderildi
         }
