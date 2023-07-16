@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.concrete;
@@ -18,15 +19,22 @@ namespace Business.concrete
     public class CarManager : ICarService
     {
         ICarDal _CarDal;
-        public CarManager(ICarDal CarDal)
+        IBrandService _brandService;
+        public CarManager(ICarDal CarDal, IBrandService brandService)
         {
             _CarDal = CarDal;
+            _brandService = brandService;
         }
         [ValidationAspect(typeof(CarValidator))]// add metodunu dogrula carvalidator kullanarak 
         public IResults Add(Car car)
         {
-            
-            _CarDal.Add(car);                                                                  
+            IResults result = BusinessRules.Run(CheckIfCarCountOfBrandCorrect(car.CarId), CheckIfCarNameExists(car.CarName));
+                                                                             
+            if(result !=null)
+            {
+                return result;
+            }
+            _CarDal.Add(car);
             return new SuccessResult(Message.CarAdded);                                         
         }
 
@@ -70,6 +78,34 @@ namespace Business.concrete
         {
             _CarDal.Update(car);
             return new SuccessResult(Message.CarUpdated);
+        }
+        private IResults CheckIfCarNameExists(string carName)
+        {
+            var result = _CarDal.GetAll(p=>p.CarName==carName).Any();
+            if(result==true)
+            {
+                return new ErrorResult(Message.CarNameAlreadyExists);
+            }
+            return new SuccessResult();
+        }
+
+        private IResults CheckIfCarCountOfBrandCorrect(int brandId)
+        {
+            var result = _CarDal.GetAll(p=>p.BrandId == brandId).Count;
+            if(result <= 15)
+            {
+                return new ErrorResult(Message.CarCountOfBrandCorrect);
+            }
+            return new SuccessResult();
+        }
+        private IResults CheckifBrandLimitExceded()
+        {
+            var result = _brandService.GetAll();
+            if (result.Data.Count > 20)
+            {
+                return new ErrorResult(Message.BrandLimitExceded);
+            }
+            return new SuccessResult();
         }
     }
 }

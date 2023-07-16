@@ -41,7 +41,7 @@ namespace Core.DataAccess.EntityFramework
             using (TContext context = new TContext())
             {
                 return context.Set<TEntity>().SingleOrDefault(filter);
-                // DnSetten car bagalniyor oraya singleOrDefault uyguluyır foreach gibi dolanıyor
+                // DbSetten car bagalniyor oraya singleOrDefault uyguluyır foreach gibi dolanıyor
             }
             // yıldızlı not Car Brand Colour için standart kodlarımız hepsinde aynı olucak yani Generic base hale getirrrrrrrr
         }
